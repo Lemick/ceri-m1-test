@@ -2,10 +2,13 @@
 machine:
     java:
         version: oraclejdk8
-
+general:
+  branches:
+    only:
+      - master
 test:
   override:
-    - mvn integration-test
+    - mvn test
 
 ## Customize deployment commands
 deployment:
