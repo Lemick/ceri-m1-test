@@ -1,0 +1,14 @@
+## Customize the test machine
+machine:
+    java:
+        version: oraclejdk8
+
+test:
+  override:
+    - mvn integration-test
+
+## Customize deployment commands
+deployment:
+  staging:
+    branch: master
+
