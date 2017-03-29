@@ -9,10 +9,3 @@ general:
 test:
   override:
     - mvn test
-
-## Customize deployment commands
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: ceri-m1-test
