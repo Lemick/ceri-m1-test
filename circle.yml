@@ -11,4 +11,5 @@ test:
 deployment:
   staging:
     branch: master
-
+    heroku:
+      appname: ceri-m1-test
