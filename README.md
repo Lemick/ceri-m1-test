@@ -1,6 +1,6 @@
 ﻿# UCE Génie Logiciel Avancé : Techniques de tests
 
-Beguin Mickaël
+Beguin Mickaël - M1 ILSEN Alternant
 
 
 Sujet de TP : 
