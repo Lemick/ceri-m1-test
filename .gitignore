@@ -1,6 +1,6 @@
 .classpath
 .settings
 .project
-*.ser
+./*.ser
 /bin/
 /target/
