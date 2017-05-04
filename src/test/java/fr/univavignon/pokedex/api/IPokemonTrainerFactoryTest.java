@@ -1,5 +1,6 @@
 package fr.univavignon.pokedex.api;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import org.mockito.junit.MockitoRule;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
+
+import java.io.File;
 
 
 public class IPokemonTrainerFactoryTest {
@@ -35,12 +38,13 @@ public class IPokemonTrainerFactoryTest {
     }
 
     @Test
-    public void testCreateTrainer() {
+    public void testCreateTrainerNotExist() {
         PokemonTrainer sacha = pokemonTrainerFactoryMock.createTrainer("Pierre", Team.VALOR, pokedexFactoryMock);
         assertNotNull(sacha);
         assertNotNull(sacha.getPokedex());
         assertEquals("Pierre", sacha.getName());
-        assertEquals(Team.VALOR, sacha.getTeam());
-        
+        assertEquals(Team.VALOR, sacha.getTeam());  
     }
+    
+    
 }

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -69,6 +70,7 @@ public class IPokedexTest {
         when(pokedexAdd.addPokemon(ronflex)).thenReturn(1);
         when(pokedexAdd.size()).thenReturn(2);
        
+        when(pokedex.createPokemon(25, 10, 100, 42, 0)).thenReturn(pikachu);
     }
     
     
@@ -95,7 +97,21 @@ public class IPokedexTest {
         assertEquals(1, listIndex.indexOf(ronflex));
         assertEquals(1, listCP.indexOf(ronflex));
     }
+    
+    @Test
+    public void testGetPokemons() {
+    	List<Pokemon> pokemons = pokedex.getPokemons();
+    	
+    	assertEquals(2, pokemons.size());
+    	assertEquals("pikachu", pokemons.get(0).getName());
+    }
 
+    @Test
+    public void testCreatePokemon() {
+    	Pokemon pokemon = pokedex.createPokemon(25, 10, 100, 42, 0);
+    	
+    	assertNotNull(pokemon);
+    }
     
 
 }

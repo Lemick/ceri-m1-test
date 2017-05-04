@@ -33,8 +33,7 @@ public class PokemonTrainerPersistableTest {
 	}
     
     @Test
-    public void testPersist() {
-    	
+    public void testPersist() {  	
     	trainer.persist();
     	File file = new File(name + trainer.FILE_EXTENSION);
     	assertTrue(file.exists());

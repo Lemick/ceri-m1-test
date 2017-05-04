@@ -51,6 +51,7 @@ public class Pokedex implements IPokedex, Serializable  {
 	@Override
 	public int addPokemon(Pokemon pokemon) {
 		lPokemon.add(pokemon);
+		notifyObservers();
 		return lPokemon.size()-1;
 	}
 

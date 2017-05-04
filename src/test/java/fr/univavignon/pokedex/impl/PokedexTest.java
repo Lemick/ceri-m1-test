@@ -3,6 +3,8 @@ package fr.univavignon.pokedex.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -24,9 +26,11 @@ public class PokedexTest extends IPokedexTest{
 	@Override
 	public void setUp() throws PokedexException {
 		pokedex = new Pokedex(metaProviderMock, pokeFactoryMock);
+		when(pokeFactoryMock.createPokemon(25, 10, 100, 42, 0)).thenReturn(pikachu);
 		pokedex.addPokemon(pikachu);
 		pokedex.addPokemon(ronflex);
 		
+		/** Celui-ci doit être vide **/
 		pokedexAdd = new Pokedex(metaProviderMock, pokeFactoryMock);
 	}
 	

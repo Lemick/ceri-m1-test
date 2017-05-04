@@ -14,13 +14,14 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
 	@Override
 	public PokemonTrainer createTrainer(String name, Team team, IPokedexFactory pokedexFactory) {
-		PokemonTrainer trainer = loadTrainer(name);
+		PokemonTrainerPersistable trainer = loadTrainer(name);
 		if(trainer == null) { // On crée l'instance si pas de sauvegarde locale
 			PokemonMetadataProvider metadataProvider = new PokemonMetadataProvider();
 			PokemonFactory pokeFactory = new PokemonFactory();
 			Pokedex pokedex = (Pokedex) pokedexFactory.createPokedex(metadataProvider, pokeFactory);
 			trainer = new PokemonTrainerPersistable(name, team, pokedex);
 			pokedex.addObserver((EditableObserver) trainer);
+			trainer.persist();
 		} 
 		return trainer;
 	}
@@ -44,6 +45,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 			System.err.println("ClassNotFound loadTrainer");
 		} catch (IOException e) {
 			System.err.println("IOException loadTrainer");
+			e.printStackTrace();
 		} finally {
 			try {
 				if(f != null)
@@ -57,4 +59,11 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 		return res;
 	}
 
+	
+	public static void main(String[] args) {
+		(new PokemonTrainerFactory()).createTrainer("Clay", Team.MYSTIC, new PokedexFactory());
+		PokemonTrainer test = (new PokemonTrainerFactory()).loadTrainer("Clay");
+		return;
+		
+	}
 }
