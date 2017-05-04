@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -19,26 +18,26 @@ public class IPokemonFactoryTest {
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Mock
-    protected static IPokemonFactory pokemonFactoryMock;
+    protected IPokemonFactory pokemonFactoryMock;
 
     @Before
     public void setUp() throws PokedexException {
-        when(pokemonFactoryMock.createPokemon(0, 0, 0, 0, 0))
-        .thenReturn(new Pokemon(1, "Pika", 10, 20, 30, 40, 50, 60, 70, 80.0));
+        when(pokemonFactoryMock.createPokemon(25, 20, 100, 20, 50))
+        .thenReturn(new Pokemon(25, "pikachu", 55, 40, 90, 20, 100, 20, 50, 50.0));
     }
 
     @Test
     public void testCreatePokemon() {
-        Pokemon pokemon = pokemonFactoryMock.createPokemon(0, 0, 0, 0, 0);
+        Pokemon pokemon = pokemonFactoryMock.createPokemon(25, 20, 100, 20, 50);
         assertNotNull(pokemon);
-        assertEquals("Pika", pokemon.getName());
-        assertEquals(10, pokemon.getAttack());
-        assertEquals(20, pokemon.getDefense());
-        assertEquals(30, pokemon.getStamina());
-        assertEquals(40, pokemon.getCp());
-        assertEquals(50, pokemon.getHp());
-        assertEquals(60, pokemon.getDust());
-        assertEquals(70, pokemon.getCandy());
-        assertEquals(80.0, pokemon.getIv());
+        assertEquals("pikachu", pokemon.getName());
+        assertEquals(55, pokemon.getAttack());
+        assertEquals(40, pokemon.getDefense());
+        assertEquals(90, pokemon.getStamina());
+        assertEquals(20, pokemon.getCp());
+        assertEquals(100, pokemon.getHp());
+        assertEquals(20, pokemon.getDust());
+        assertEquals(50, pokemon.getCandy());
+        assertEquals(50.0, pokemon.getIv());
     }
 }

@@ -1,7 +1,6 @@
 package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -38,5 +37,6 @@ public class IPokedexFactoryTest {
     public void testCreatePokedex() {
         IPokedex pokedex = pokedexFactoryMock.createPokedex(pokemonMetadataProviderMock, pokemonFactoryMock);
         assertNotNull(pokedex);
+
     }
 }

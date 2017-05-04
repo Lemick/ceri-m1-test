@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -16,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -27,12 +24,15 @@ public class IPokedexTest {
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Mock
-    private IPokedex pokedex;
+    protected IPokedex pokedex;
 
-    private int pSize =  0;
+    @Mock
+    protected IPokedex pokedexAdd;
     
-    private Pokemon pikachu = new Pokemon(0,"pikachu",80,90,70,60,50,40,43,26);
-    private Pokemon ronflex = new Pokemon(0,"ronflex",78,56,45,34,23,12,2,23);
+    protected int pSize =  0;
+    
+    protected Pokemon pikachu = new Pokemon(0,"pikachu",80,90,70,60,50,40,43,26);
+    protected Pokemon ronflex = new Pokemon(0,"ronflex",78,56,45,70,23,12,2,23);
     
 
     @Before
@@ -56,53 +56,46 @@ public class IPokedexTest {
         when(pokedex.getPokemon(1)).thenThrow(new PokedexException("Index Invalide"));
 
         List<Pokemon> pList = new ArrayList<>();
-        List<Pokemon> pList2 = new ArrayList<>();
         pList.add(pikachu);
         pList.add(ronflex);
 
         when(pokedex.getPokemons()).thenReturn(Collections.unmodifiableList(pList));
-        pList2.add(ronflex);
-        pList2.add(pikachu);
-        when(pokedex.getPokemons(any())).thenReturn(Collections.unmodifiableList(pList2)).thenReturn(Collections.unmodifiableList(pList));
-  
+
+        when(pokedex.getPokemons(PokemonComparators.NAME)).thenReturn(Collections.unmodifiableList(pList));
+        when(pokedex.getPokemons(PokemonComparators.INDEX)).thenReturn(Collections.unmodifiableList(pList));
+        when(pokedex.getPokemons(PokemonComparators.CP)).thenReturn(Collections.unmodifiableList(pList));
+        
+        when(pokedexAdd.addPokemon(pikachu)).thenReturn(0);
+        when(pokedexAdd.addPokemon(ronflex)).thenReturn(1);
+        when(pokedexAdd.size()).thenReturn(2);
+       
     }
     
     
     @Test
     public void testAddPokemon() {
-        assertEquals(0, pokedex.addPokemon(pikachu));
-        assertEquals(1, pokedex.addPokemon(ronflex));
-        assertEquals(2, pokedex.size());
+    	
+        assertEquals(0, pokedexAdd.addPokemon(pikachu));
+        assertEquals(1, pokedexAdd.addPokemon(ronflex));
+        assertEquals(2, pokedexAdd.size());
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
-        pokedex.addPokemon(pikachu);
-
         assertEquals("pikachu", pokedex.getPokemon(0).getName());
     }
 
 
     @Test
     public void testGetPokemonsOrder() throws PokedexException {
-        pokedex.addPokemon(pikachu);
-        pokedex.addPokemon(ronflex);
         List<Pokemon> listName = pokedex.getPokemons(PokemonComparators.NAME);
         List<Pokemon> listIndex = pokedex.getPokemons(PokemonComparators.INDEX);
         List<Pokemon> listCP = pokedex.getPokemons(PokemonComparators.CP);
-        assertEquals(0, listName.indexOf(ronflex));
+        assertEquals(1, listName.indexOf(ronflex));
         assertEquals(1, listIndex.indexOf(ronflex));
-        assertEquals(1, listIndex.indexOf(ronflex));
+        assertEquals(1, listCP.indexOf(ronflex));
     }
 
-    @Test
-    public void testGetPokemons() throws PokedexException {
-        pokedex.addPokemon(pikachu);
-        pokedex.addPokemon(ronflex);
-        List<Pokemon> list = pokedex.getPokemons();
-
-        assertEquals(pokedex.size(), list.size());
-    }
     
 
 }

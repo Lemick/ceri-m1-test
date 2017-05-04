@@ -1,12 +1,16 @@
 package fr.univavignon.pokedex.api;
 
+import java.io.Serializable;
+
 /**
  * Pokemon metadata POJO.
  * 
  * @author fv
  */
-public class PokemonMetadata {
+public class PokemonMetadata implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/** Pokemon index. **/
 	private final int index;
 
