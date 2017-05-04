@@ -1,7 +1,6 @@
 package fr.univavignon.pokedex.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -33,11 +32,8 @@ public class PokemonTrainerPersistable extends PokemonTrainer implements Seriali
 			f = new FileOutputStream(new File(getName() + FILE_EXTENSION));
 			o = new ObjectOutputStream(f);
 			o.writeObject(this);
-
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found");
-		} catch (IOException e) {
-			System.out.println("Error initializing stream");
+		} catch (Exception e) {
+			System.out.println("Error onChange " + e.getMessage());
 		}  finally {
 			try {
 				f.close();

@@ -1,6 +1,5 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,8 +10,6 @@ import org.mockito.junit.MockitoRule;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
-
-import java.io.File;
 
 
 public class IPokemonTrainerFactoryTest {

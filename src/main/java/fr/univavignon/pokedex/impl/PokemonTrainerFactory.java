@@ -20,7 +20,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 			PokemonFactory pokeFactory = new PokemonFactory();
 			Pokedex pokedex = (Pokedex) pokedexFactory.createPokedex(metadataProvider, pokeFactory);
 			trainer = new PokemonTrainerPersistable(name, team, pokedex);
-			pokedex.addObserver((EditableObserver) trainer);
+			pokedex.addObserver(trainer);
 			trainer.persist();
 		} 
 		return trainer;
@@ -40,10 +40,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 			} else {
 				return null;
 			}
-			
-		} catch (ClassNotFoundException e) {
-			System.err.println("ClassNotFound loadTrainer");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println("IOException loadTrainer");
 			e.printStackTrace();
 		} finally {
