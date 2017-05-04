@@ -1,7 +1,5 @@
 package fr.univavignon.pokedex.api;
 
-import java.io.Serializable;
-
 /**
  * Factory interface for class that aims to create IPokedex instance.
  * 
