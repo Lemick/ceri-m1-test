@@ -10,4 +10,6 @@ public class PokemonFactoryTest extends IPokemonFactoryTest {
 		pokemonFactoryMock = new PokemonFactory();
 	}
 	
+	
+	
 }

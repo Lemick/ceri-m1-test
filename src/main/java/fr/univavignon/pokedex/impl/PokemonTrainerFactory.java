@@ -59,11 +59,4 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 		return res;
 	}
 
-	
-	public static void main(String[] args) {
-		(new PokemonTrainerFactory()).createTrainer("Clay", Team.MYSTIC, new PokedexFactory());
-		PokemonTrainer test = (new PokemonTrainerFactory()).loadTrainer("Clay");
-		return;
-		
-	}
 }

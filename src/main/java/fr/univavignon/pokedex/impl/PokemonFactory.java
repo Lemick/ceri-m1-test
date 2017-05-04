@@ -18,7 +18,6 @@ public class PokemonFactory implements IPokemonFactory, Serializable {
 	
 	@Override
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
-		Pokemon pokemon;
 		PokemonMetadata pokemonMetadata;
 		try {
 			pokemonMetadata = pokemonMetadataProvider.getPokemonMetadata(index);
