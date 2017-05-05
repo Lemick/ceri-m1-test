@@ -18,13 +18,11 @@ public class Pokedex implements IPokedex, Serializable  {
 	private static final long serialVersionUID = 1L;
 	
 	private List<Pokemon> lPokemon;
-	private IPokemonMetadataProvider pokeMetadataProvider;
 	private List<EditableObserver> observers;
 	protected IPokemonFactory pokeFactory;
 
 	
 	public Pokedex(IPokemonMetadataProvider pokeMetadataProvider, IPokemonFactory pokeFactory) {
-		this.pokeMetadataProvider = pokeMetadataProvider;
 		this.pokeFactory = pokeFactory;
 		lPokemon = new ArrayList<Pokemon>();
 		observers = new ArrayList<EditableObserver>();

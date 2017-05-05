@@ -21,7 +21,7 @@ import fr.univavignon.pokedex.data.FileUtil;
 
 public class PokemonTrainerFactoryTest extends IPokemonTrainerFactoryTest {
 
-	PokemonTrainerPersistable trainer;
+	private PokemonTrainerPersistable trainer;
 	
 	@Override
 	@Before

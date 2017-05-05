@@ -18,10 +18,10 @@ import fr.univavignon.pokedex.api.Pokemon;
 public class PokedexTest extends IPokedexTest{
 	
 	@Mock
-	IPokemonMetadataProvider metaProviderMock;
+	protected IPokemonMetadataProvider metaProviderMock;
 	
 	@Mock
-	IPokemonFactory pokeFactoryMock;
+	protected IPokemonFactory pokeFactoryMock;
 	
 	@Override
 	public void setUp() throws PokedexException {

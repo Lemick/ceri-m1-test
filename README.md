@@ -7,7 +7,7 @@ Beguin Mickaël - M1 ILSEN Alternant
 
 Notes d'implémentation :
 
-Chaque classe de test étend celle developpée avant l'implémentation, les mocks sont alors remplacés par des instances réelles. 
-Les mocks sont en revanche utilisés dans les tests d'implémentations pour ne pas avoir à utiliser de vraies instances et augmenter la fiabilité des tests.
-
+Chaque classe de test à été developpé aprés l'implémentation et étend celle developpée avant l'implémentation, les mocks sont alors remplacés par des instances réelles. 
+Les mocks sont aussi utilisés dans les tests d'implémentations pour ne pas avoir à utiliser de vraies instances et augmenter la fiabilité des tests.
+Le dossier resources contient des données utilisées dans les tests.
 
