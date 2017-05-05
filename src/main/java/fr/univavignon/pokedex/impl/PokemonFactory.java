@@ -1,10 +1,6 @@
 package fr.univavignon.pokedex.impl;
 
-import java.io.IOException;
 import java.io.Serializable;
-
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import fr.univavignon.pokedex.api.IPokemonFactory;
 import fr.univavignon.pokedex.api.PokedexException;
