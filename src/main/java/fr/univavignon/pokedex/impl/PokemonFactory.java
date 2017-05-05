@@ -1,6 +1,10 @@
 package fr.univavignon.pokedex.impl;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import fr.univavignon.pokedex.api.IPokemonFactory;
 import fr.univavignon.pokedex.api.PokedexException;
@@ -9,6 +13,8 @@ import fr.univavignon.pokedex.api.PokemonMetadata;
 
 public class PokemonFactory implements IPokemonFactory, Serializable {
 
+	private static final long serialVersionUID = 6063500348076586948L;
+	
 	private PokemonMetadataProvider pokemonMetadataProvider;
 	
 	
@@ -30,6 +36,4 @@ public class PokemonFactory implements IPokemonFactory, Serializable {
 						pokemonMetadata.getStamina(), cp, hp, dust, candy, 50);
 		
 	}
-
-
 }

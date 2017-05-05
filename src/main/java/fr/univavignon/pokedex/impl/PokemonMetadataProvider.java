@@ -37,47 +37,42 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider, Serial
 		PokemonMetadata res = pokemonMetadatas.get(index);
 		if (res != null)
 			return res;
-		
-		HttpURLConnection response = getHTTPResponse(index);
-		String result =  getJSONContent(response);
-		List<Object> metadatas = getMetadatasCollection(result);
-		return convertPokemonMetadatas(index, metadatas);
+			
+		String result;
+		try {
+			HttpURLConnection response = getHTTPResponse(index);
+			result = getJSONContent(response);
+			List<Object> metadatas = getMetadatasCollection(result);
+			return convertPokemonMetadatas(index, metadatas);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return res;	
 	}
 
 	/**
 	 * 
 	 * @param index Index du pokémon Ã  intégrer Ã  la requÃªte
 	 * @return Un objet représentant la réponse HTTP
+	 * @throws IOException 
 	 */
-	public HttpURLConnection getHTTPResponse(int index) {
+	public HttpURLConnection getHTTPResponse(int index) throws IOException {
 		URL url = null;
 		HttpURLConnection request = null;
 		System.setProperty("http.agent", "Gonna catch them all"); // Set user-sagent
-
-		try {
-			url = new URL("http://pokeapi.co/api/v2/pokemon/" + index);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		try {
-			request = (HttpURLConnection) url.openConnection();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			request.connect();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		url = new URL("http://pokeapi.co/api/v2/pokemon/" + index);
+		request = (HttpURLConnection) url.openConnection();
+		request.connect();
+	
 		return request;
 	}
 	/**
 	 * Retourne le texte JSON lié à la requête
 	 * @param request Requête http à lire
 	 * @return le texte JSON
+	 * @throws IOException 
 	 */
-	public String getJSONContent(HttpURLConnection request) {
+	public String getJSONContent(HttpURLConnection request) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		BufferedInputStream is = null;
 		BufferedReader br;
@@ -89,16 +84,9 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider, Serial
 			while ((inputLine = br.readLine()) != null) {
 				sb.append(inputLine);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
 			if (is != null) {
-				try { 
-					is.close(); 
-				} 
-				catch (IOException e) {
-
-				}
+				is.close(); 
 			}   
 		}
 		return sb.toString();
@@ -126,18 +114,13 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider, Serial
 	 * @return Les métadonnées converties
 	 */
 	public PokemonMetadata convertPokemonMetadatas(int index, List<Object> metadatas) {
-		PokemonMetadata pokemonMetadata;
 		String name = null;
 		int attack = 0, defense = 0, stamina = 0;
 		if(metadatas.size() == stats.length + 1) { // Having datas we need
 			name = (String) metadatas.get(0);
-			try {
-				attack = (int)metadatas.get(1);
-				defense = (int)metadatas.get(2);
-				stamina = (int)metadatas.get(3);
-			} catch (NumberFormatException e) {
-				return null;
-			}
+			attack = (int)metadatas.get(1);
+			defense = (int)metadatas.get(2);
+			stamina = (int)metadatas.get(3);
 		}
 		return new PokemonMetadata(index, name, attack, defense, stamina);
 	}
